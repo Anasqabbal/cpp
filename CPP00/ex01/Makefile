@@ -1,14 +1,14 @@
 NAME=phonebook
 CC=c++
-FLAGS= -Wall -Wextra -Werror
-ADDFLAGS=-std=c++98
-SRC=phonebook.cpp
-INCLUDES= phonebook.hpp
-OBJ=$(SRC:.cpp=.o)
+S=-fsanitize=address -g
+FLAGS=-Wall -Wextra -Werror $(s)
+SRC= phonebook.cpp
+OBJ= $(SRC:.cpp=.o)
+ADDFLAGS= -std=c++98
 
 all : $(NAME)
 
-$(NAEM) : $(OBJ)
+$(NAME) : $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $@
 
 %.o : %.cpp
@@ -22,4 +22,3 @@ fclean : clean
 
 re : fclean all
 
-.IPHONY : clean

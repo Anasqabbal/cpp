@@ -1,19 +1,33 @@
 #include <iostream>
 
- char ft_toupper(char *c)
+ char ex00_toupper(char c)
 {
-    if (*c >= 97 && *c <= 122)
-        return (*c -= 32, 1);
+    if (c >= 97 && c <= 122)
+        c -= 32;
+    if (c != ' ')
+        std::cout << c;
     return (0);
+}
+
+int   ex00_skip_spaces(char *c)
+{
+    int i = 0;
+
+    while(c[i] && c[i] == ' ')
+        i++;
+    if (!c[i])
+        return (0);
+    return (i);
 }
 
 int main(int ac, char **av)
 {
     int i;
     int j;
+    int c;
 
     if (ac == 1)
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *\n";
+        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
     i = 0;
     while(++i < (ac))
     {
@@ -24,9 +38,16 @@ int main(int ac, char **av)
         {
             if (!av[i][j])
                 break ;
-            ft_toupper(&av[i][j]);
-            std::cout << av[i][j];
-            j++;
+            ex00_toupper(av[i][j]);
+            c = ex00_skip_spaces(av[i] + j);
+            if (c)
+            {
+                std::cout << " ";
+                j += c;
+            }
+            else
+                j += 1;
+            c = 0;
         }
         if ((i + 1) != ac)
             std::cout << " ";
