@@ -1,59 +1,114 @@
 #include "phonebook.hpp"
 
+
+/* UNFORMATED AND FORMATED IO operations 
+	UNFORMATED I/O operations,
+		unformated input operations, 
+
+
+	FORMATED I/O operation
+		is read  / write from / to the stream in a specified format to control the appearance
+	and interpretation of data 
+	(char, int, float ...).
+
+
+ */
+	
+
+
+
 using namespace std;
 
-void PhoneBook::ft_search(Contact *contacts, int ft_index, int ii)
+void print_the_world(const char *str, int len)
 {
-	const char	*to_display;
-	int			ind;
+	int	rest;
+	int	i = -1;
+	int  j = -1;
 
-	ind = -1;
-	if (ft_index == 0)
+	rest = 10 - len;
+	if (rest > 0)
 	{
-		puts("the index can't start from 0");
-		return ;
-	}
-	else if (ft_index > 8)
-	{
-		puts("your index is out of the range");
-		return ;
+		while(++i < rest)
+			write(1, " ", 1);
 	}
 	else
+		i = 0;
+	while(i < 10)
 	{
-		if (ft_index > ii)
+		if (i < 9)
 		{
-			printf("your have only %d at this time\n", ii);  /*remove this printf*/
-			return ;
+			write(1, &str[++j], 1);
+			i++;
 		}
-		int i = 0;
-		while(++ind < 4)
+		if (i == 9)
 		{
-			if (ind == 0)
-				to_display = contacts[ft_index - 1].index.c_str();
-			else if (ind == 1)
-				to_display = contacts[ft_index - 1].firstname.c_str();
-			else if (ind == 2)
-				to_display = contacts[ft_index - 1].lastname.c_str();
-			else if (ind == 3)
-				to_display = contacts[ft_index - 1].nickname.c_str();
-			i = -1;
-			while(++i < 10)
-			{
-				if (i < 10 && i < (int)strlen(to_display))
-				{
-					if (i == 9 && strlen(to_display) > 10)
-						write(1, ".", 1);
-					else
-						write(1, &to_display[i], 1);
-				}
-				else if (i < 10)
-					write(1, " ", 1);
-			}
-			if (i == 10 && ind <= 2)
-				write(1, "|", 1);
+			if (i < (len - 1))
+				write(1, ".", 1);
+			else
+				write(1, &str[++j], 1);
+			i++;
+			break ;
 		}
+	}
+	if (i == 10)
+		write(1, "|", 1);
+}
+
+int	print_full_information(PhoneBook ph, int index, int *flag)
+{
+	const char *str;
+
+	if (index > 8 || index > ph.i || index < 0)
+		return ( *flag = 1, 0);
+	{
+		str = ph.contacts[index].firstname.c_str();	
+		write(1, "firstname: ", 11);
+		write(1 ,str , strlen(str));
+		write(1, "\n", 1);
+		str = ph.contacts[index].lastname.c_str();
+		write(1, "lastname: ", 10);
+		write(1 ,str , strlen(str));
+		write(1, "\n", 1);
+		str = ph.contacts[index].lastname.c_str();
+		write(1, "nickname: ", 10);
+		write(1 ,str , strlen(str));
+		write(1, "\n", 1);
+		str = ph.contacts[index].phone_number.c_str();
+		write(1, "phonenumber: ", 13);
+		write(1 ,str , strlen(str));
+		write(1, "\n", 1);
+		str = ph.contacts[index].darkest_secret.c_str();
+		write(1, "darket secret: ", 15);
+		write(1 ,str , strlen(str));
 		write(1, "\n", 1);
 	}
+	return (1);
+}
+
+void PhoneBook::ft_search(Contact *contacts, int ft_index, int ii, int max)
+{
+	const char	*to_display; 	/* convert the string object to char * */
+	int			ind; 			/* to loop around the menmbers of the struct */
+	// int			j = -1;		/* to loop around the indexes */
+
+	(void)ii;
+	(void)max;
+	int i = 0; /* to write 10 characters */
+	ind = -1;
+	while(++ind < 4)
+	{
+		if (ind == 0)
+			to_display = contacts[ft_index].index.c_str();
+		else if (ind == 1)
+			to_display = contacts[ft_index].firstname.c_str();
+		else if (ind == 2)
+			to_display = contacts[ft_index].lastname.c_str();
+		else if (ind == 3)
+			to_display = contacts[ft_index].nickname.c_str();
+		i = -1;
+		print_the_world(to_display, strlen(to_display));
+	}
+	write(1, "\n", 1);
 }
 
 void PhoneBook::ft_add(Contact *contacts, int i, std::string str, int ind)
@@ -69,7 +124,6 @@ void PhoneBook::ft_add(Contact *contacts, int i, std::string str, int ind)
 	else if (ind == 4)
 		contacts[i % 8].darkest_secret = str;
 }
-
 
 void PhoneBook::ft_read(int ind, Contact *contacts,  int ft_index)
 {
@@ -105,7 +159,7 @@ void PhoneBook::ft_read(int ind, Contact *contacts,  int ft_index)
 		if (!res)
             return ;
 		if (++i && (!strcmp(res, "")))
-			continue;
+			continue ;
 		ft_add(contacts, ft_index, line, ind);
 		break ;
 	}
@@ -113,59 +167,16 @@ void PhoneBook::ft_read(int ind, Contact *contacts,  int ft_index)
 		e = 0;
 }
 
-int main()
+void	ft_fulldisplays(PhoneBook ph)
 {
-    const char        *str;
-    std::string strl;
-    const char  *res;
-    std::string      line;
-    PhoneBook   ph;
-    int         index;
-    int         i;
-
-    i = 0;
-    index = 0;
-    ph.i = 0;
-
-    (void)res;
-    while(1)
-    {
-        std::cin >> strl;
-        str = strl.c_str();
-        std::cout << "string style in c ";
-        std::cout << str;
-        // if (std::cin.eof()) /* why you try to exit the program */
-        //     exit(0);
-        if (!str)
-            printf("7adari obababababababab\n");
-        if (str && !strcmp(str, "ADD"))
-        {
-            ph.ft_read(0, ph.contacts, index);
-            ph.ft_read(1, ph.contacts, index);
-            ph.ft_read(2, ph.contacts, index);
-            ph.ft_read(3, ph.contacts, index);
-            ph.ft_read(4, ph.contacts, index);
-            ph.contacts[index % 8].index = ((index % 8) + 48) + 1;
-            if (ph.i < 7)
-                ph.i++;
-            index++;
-        }
-        else if (str && !strcmp(str, "SEARCH"))
-        {
-            while(1)
-            {
-                getline(cin, line, '\n');
-                res = line.c_str();
-                if (!res)
-                    break ;
-                if (++i && (!strcmp(res, "")))
-                    continue;
-                ph.ft_search(ph.contacts, atoi(res), (ph.i));
-                    break ;
-            }
-        }
-        else if (str && !strcmp(str, "EXIT"))
-            exit(0);
-    }
-    return 0;
+	int i  = -1;
+	write(1, "--------------------------------------------\n", 45);
+	print_the_world("index", 5);
+	print_the_world("firstname", 9);
+	print_the_world("lastname", 8);
+	print_the_world("nickname", 8);
+	write(1, "\n", 1);
+	write(1, "|------------------------------------------|\n", 45);
+	while(i++ < ph.i)
+		ph.ft_search(ph.contacts, i, ph.i, ph.i);
 }

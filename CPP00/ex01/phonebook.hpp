@@ -24,7 +24,12 @@ public :
 
 	void ft_add(Contact *contacts, int i, const std::string str, int ind);
 	void ft_read(int ind, Contact *contacts,  int ft_index);
-	void ft_search(Contact *contacts, int ft_index, int ii);
+	void ft_search(Contact *contacts, int ft_index, int ii, int max);
 };
+
+	int		ft_contdisplay(PhoneBook ph, int index);
+	void	ft_fulldisplays(PhoneBook ph);
+	void	print_the_world(const char *str, int len);
+	int		print_full_information(PhoneBook ph, int index, int *flag);
 
 # endif

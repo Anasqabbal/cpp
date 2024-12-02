@@ -4,20 +4,61 @@
 
 ## New thing based on C
 
-<< >> : in C you can use them to shift bits and in c++ you can use them for shift bits left and right and also this << as insertion operator
+.<< : insertion opearator.\
+.>> : extraction operator.
+
+<< >> : in C you can use them to shift bits and in c++ you can use them for shift bits left and right and also this << as insertion operator to take the data from a stream and\
+this operator >> to display data to a stream.
+
+:: scope resolution operator
+
+1. accesse a global var when there is a local var with the same name
+2. to define a function outside a class
+3. to access a class's static var.
+4. in case of multiple inheritance 
+5. for namespace
+
 
 ## basic things to know in C
 **name space**: Namespaces allows you to group entities like classes objects and functions under a 
 name\
 **classes** is an expanded concept of a data structure, instead of holding only the data, it can hold the both data and functions\
 you can declare class using the keyword `class`
-**object**: is an instantiation af a `class`.\
+**object**: is an instantiation of a `class`.\
 **member functions**: is operators and functions that are declared as members of a class, the body of member function is analysed after the class declaration. so you can use the data or member that is inside your class in your member function.
 - member functions : they have access to data members and other member functions of the class
 - you can invoke the member function using the dote operator after the name of your object.
 - when a member function is defined with const. it  can be called on a constant object and will not modify the object.
+
+**const member function** is a memer function in its prototype we found the keyword *const* like this\
+ `void	displayStatus( void ) const;`
+
+### overloaded functions
+
+the overloaded functions reduce the number of functions names to be remembered.
+with overloading you can several functions with the same name but with different parameters
+
+### constructor 
+A constructor is a member function that is executed automatically whenever an object is created. the constructor its name like the class name.
+
+### destructor
+
+
+
+# STDIO STREAM
+
+### stream
+out context of programming you can imagine it is like flowing of water from a side to another one, but in the contex of programming it means the flows of data also from the side to another one
+
 **stdio streams**: is a c++ way of formating input and output to a variety of sources, including the console, files, and string buffer.
 
+### console
+the console is the manner that the user uses to interact with the system programs of the OS or with another console applications.
+the interaction consist of the text input from the STDIN  usually the keyboard, or the text displayed that is in this case is STDOUT.
+
+## formated and unformated IO in C++
+### formated input/ output
+you can take from the user or put to the user the values in different formats (int, char, float ...). this input is separated by white space characters, the data type of the user input must be similar to the data types fo the varables which are declared inside your  program.
 
 
 ## ex00
@@ -31,4 +72,12 @@ bouth the cin and cout in c++ is objects which you can use them to get the input
 
 \
   ```cout << "Hello User" << "\n";```
+
+## ex01
+
+### important things you should keep them in your mind
+
+#### input buffering
+#### what is buffer
+a buffer contains data that is strored for as short amount of time, typically in teh compuer't memory (RAM) The purpose of a buffer is to hold data right before it is used 
 
