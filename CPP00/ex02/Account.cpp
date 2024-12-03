@@ -21,6 +21,13 @@ int	Account::getNbWithdrawals( void )
     return (_totalNbWithdrawals);
 }
 
+void	Account::displayStatus( void ) const
+{
+    std::cout<<"index:"<<_accountIndex;
+    std::cout<<";amount:"<<_amount;
+    std::cout<<";deposits:"<<_nbDeposits;
+    std::cout<<";withdrawals:"<<_nbWithdrawals << std::endl;
+}
 void	Account::displayAccountsInfos( void )
 {
     /* to display times temp */
@@ -34,9 +41,23 @@ void	Account::displayAccountsInfos( void )
     std::cout << getNbWithdrawals() << std::endl;
 }
 
-void    Account::Account( int initial_deposit )
+int Account::_nbAccounts = 0;
+int	Account::_totalAmount;
+int	Account::_totalNbDeposits;
+int	Account::_totalNbWithdrawals;
+
+Account::Account( int initial_deposit )
 {
+    static int index;
+    _nbAccounts = index + 1;
+    _nbDeposits = 0;
     _amount = initial_deposit;
+    _nbWithdrawals = 0;
+    _accountIndex = index;
+    _totalAmount += initial_deposit;
+    std::cout << "index:" << index << ";amount:" << initial_deposit << ";created\n";
+    index++;
+
 }
 
 // void    Account::displayStatus(void)
@@ -70,17 +91,14 @@ void    Account::Account( int initial_deposit )
     BASIC_FUNCTIONS
     ADD TO BACK =+>  .push_back();
     EDIT AT INDEX =+> .at(index_num);
-    REMOVE THE LAST ONE =+> pop_back(); 
+    REMOVE THE LAST ONE =+> pop_back();
+
+    ITERATING
+    we can iterate through the objects using the loops (while, for, ...)
+    and in c++ there is also another iterator we can use to iterate over our container like iterator
 
 
 */
 
 
-
-
-int main()
-{
-    
-    // t   Account[8];/
-    std::cout<<"nothing to see here" << std::endl;
-}
+// static variables cannot initialised inside constructors

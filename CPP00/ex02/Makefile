@@ -1,6 +1,6 @@
-NAME=Account.a
+NAME=account
 CC=c++
-SRC=Account.cpp
+SRC=Account.cpp tests.cpp
 FLAGS=-Wall -Wextra -Werror
 OBJ=$(SRC:.cpp=.o)
 ADDFLAGS= -std=c++98
@@ -12,7 +12,6 @@ $(NAME) : $(OBJ)
 
 %.o : %.cpp Account.hpp
 	$(CC) $(FLAGS) -c $< -o $@
-	ar -rc $(NAME) $@
 
 clean :
 	rm -f $(OBJ)
