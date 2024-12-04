@@ -17,8 +17,8 @@
 int		main( void ) {
 
 	typedef std::vector<Account::t>							  accounts_t;
-	// typedef std::vector<int>								  ints_t; // we rename the container vector with the name ints_t
-	// typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;
+	typedef std::vector<int>								  ints_t; // we rename the container vector with the name ints_t
+	typedef std::pair<accounts_t::iterator, ints_t::iterator> acc_int_t;
 
 	int	const				amounts[]	= { 42, 54, 957, 432, 1234, 0, 754, 16576 };
 	size_t const			amounts_size( sizeof(amounts) / sizeof(int) );
@@ -26,42 +26,41 @@ int		main( void ) {
 	accounts_t::iterator	acc_begin	= accounts.begin();
 	accounts_t::iterator	acc_end		= accounts.end();
 
-	// int	const			d[]			= { 5, 765, 564, 2, 87, 23, 9, 20 };
-	// size_t const		d_size( sizeof(d) / sizeof(int) );
-	// ints_t				deposits( d, d + d_size );
-	// ints_t::iterator	dep_begin	= deposits.begin();
-	// ints_t::iterator	dep_end		= deposits.end();
+	int	const			d[]			= { 5, 765, 564, 2, 87, 23, 9, 20 };
+	size_t const		d_size( sizeof(d) / sizeof(int) );
+	ints_t				deposits( d, d + d_size );
+	ints_t::iterator	dep_begin	= deposits.begin();
+	ints_t::iterator	dep_end		= deposits.end();
 
-	// // int	const			w[]			= { 321, 34, 657, 4, 76, 275, 657, 7654 };
-	// // size_t const			w_size( sizeof(w) / sizeof(int) );
-	// // ints_t				withdrawals( w, w + w_size ); //initialise the container with the type of initialisation that we call it in c++ (parentheze initialisation)
-	// // ints_t::iterator	wit_begin	= withdrawals.begin(); // each container in c++ has it own iterator, define iterator points to the begin of the container
-	// // ints_t::iterator	wit_end		= withdrawals.end(); // define iterator points to the end of the container.
+	int	const			w[]			= { 321, 34, 657, 4, 76, 275, 657, 7654 };
+	size_t const			w_size( sizeof(w) / sizeof(int) );
+	ints_t				withdrawals( w, w + w_size ); //initialise the container with the type of initialisation that we call it in c++ (parentheze initialisation)
+	ints_t::iterator	wit_begin	= withdrawals.begin(); // each container in c++ has it own iterator, define iterator points to the begin of the container
+	ints_t::iterator	wit_end		= withdrawals.end(); // define iterator points to the end of the container.
 
 	Account::displayAccountsInfos(); 
 	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
-	// for ( acc_int_t it( acc_begin, dep_begin );
-	// 	  it.first != acc_end && it.second != dep_end;
-	// 	  ++(it.first), ++(it.second) ) {
+	for ( acc_int_t it( acc_begin, dep_begin );
+		  it.first != acc_end && it.second != dep_end;
+		  ++(it.first), ++(it.second) ) {
 
-	// 	(*(it.first)).makeDeposit( *(it.second) );
-	// }
+		(*(it.first)).makeDeposit( *(it.second) );
+	}
 
-	// Account::displayAccountsInfos();
-	// std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
+	Account::displayAccountsInfos();
+	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
-	// for ( acc_int_t it( acc_begin, wit_begin );
-	// 	  it.first != acc_end && it.second != wit_end;
-	// 	  ++(it.first), ++(it.second) ) {
+	for ( acc_int_t it( acc_begin, wit_begin );
+		  it.first != acc_end && it.second != wit_end;
+		  ++(it.first), ++(it.second) ) {
+		(*(it.first)).makeWithdrawal( *(it.second) );
+	}
 
-	// 	(*(it.first)).makeWithdrawal( *(it.second) );
-	// }
+	Account::displayAccountsInfos();
+	std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
 
-	// Account::displayAccountsInfos();
-	// std::for_each( acc_begin, acc_end, std::mem_fun_ref( &Account::displayStatus ) );
-
-	// return 0;    
+	return 0;
 }
 
 
