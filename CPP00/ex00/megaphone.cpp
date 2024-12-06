@@ -1,13 +1,5 @@
 #include <iostream>
-
- char ex00_toupper(char c)
-{
-    if (c >= 97 && c <= 122)
-        c -= 32;
-    if (c != ' ')
-        std::cout << c;
-    return (0);
-}
+#include <cstring>
 
 int   ex00_skip_spaces(char *c)
 {
@@ -38,7 +30,8 @@ int main(int ac, char **av)
         {
             if (!av[i][j])
                 break ;
-            ex00_toupper(av[i][j]);
+            if (av[i][j] != ' ')
+                std::cout.put(toupper(av[i][j]));
             c = ex00_skip_spaces(av[i] + j);
             if (c)
             {

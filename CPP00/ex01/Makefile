@@ -1,10 +1,10 @@
 NAME=phonebook
 CC=c++
-S=-fsanitize=address -g
-FLAGS=-Wall -Wextra -Werror $(s)
+ADDFLAGS= -std=c++98
+S= -fsanitize=address -g
+FLAGS=-Wall -Wextra -Werror $(ADDFLAGS)
 SRC= phonebook.cpp main.cpp
 OBJ= $(SRC:.cpp=.o)
-ADDFLAGS= -std=c++98
 
 all : $(NAME)
 
