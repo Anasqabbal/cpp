@@ -1,5 +1,6 @@
 #include "phonebook.hpp"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 int main()
@@ -11,7 +12,7 @@ int main()
     PhoneBook  			ph;
     int					index;
     int					flag;
-    bool				isnum;
+    // bool				isnum;
 
     index = 0;
     ph.set_i_value(index - 1);
@@ -48,18 +49,20 @@ int main()
                 std::getline(std::cin, line, '\n');
                 res = line.c_str();
 				if (std::cin.eof())
-            		exit(0);
+            		_exit(0);
                 if (!res)
                     break ;
                 if ((!strcmp(res, "")))
                     continue ;
-                isnum = std::all_of(line.begin(), line.end(), ::isdigit);
-				if (isnum &&  ph.print_specific_contact(ph, atoi(res), &flag))
-					break ;
+                // isnum = std::all_of(line.begin(), line.end(), ::isdigit);
+				// if (isnum &&  ph.print_specific_contact(ph, atoi(res), &flag))
+				// 	break ;
+                 if (ph.print_specific_contact(ph, atoi(res), &flag))
+                    break;
             }
         }
         else if (str && !strcmp(str, "EXIT"))
-            exit(0);
+            _exit(0);
     }
     return (0);
 }

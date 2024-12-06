@@ -1,4 +1,6 @@
 #include "phonebook.hpp"
+#include <iomanip>
+#include <stdio.h>
 
 
 /* UNFORMATED AND FORMATED IO operations 
@@ -34,18 +36,18 @@ void Contact::set_index_value(int i)
 	index = ((i % 8) + 48);
 }
 
-const char *Contact::get_values(char ind)
+std::string	Contact::get_values(char ind)
 {
 	if (ind == 0)
-		return (firstname.c_str());
+		return (firstname);
 	else if (ind == 1)
-		return (lastname.c_str());
+		return (lastname);
 	else if (ind == 2)
-		return (nickname.c_str());
+		return (nickname);
 	else if (ind == 3)
-		return (phone_number.c_str());
+		return (phone_number);
 	else if (ind == 4)
-		return (darkest_secret.c_str());
+		return (darkest_secret);
 	return (index.c_str());
 }
 
@@ -72,43 +74,58 @@ void PhoneBook::set_i_value(int val)
 
 const char *PhoneBook::get_contact_value(Contact *contacts, int index, int ind)
 {
-	return (contacts[index].get_values(ind));
+	return (contacts[index].get_values(ind).c_str());
 }
 
-void print_the_world(const char *str, int len)
+void print_the_world(std::string str, int len)
 {
-	int	rest;
-	int	i = -1;
-	int  j = -1;
-
-	rest = 10 - len;
-	if (rest > 0)
+	if (len <= 10)
 	{
-		while(++i < rest)
-			write(1, " ", 1);
+		std::cout << std::setw(10) << std::right << str.substr(0.10);
 	}
 	else
-		i = 0;
-	while(i < 10)
 	{
-		if (i < 9)
-		{
-			write(1, &str[++j], 1);
-			i++;
-		}
-		if (i == 9)
-		{
-			if (i < (len - 1))
-				write(1, ".", 1);
-			else
-				write(1, &str[++j], 1);
-			i++;
-			break ;
-		}
+		std::cout << std::setw(9) << std::right << str.substr(0, 9);
+		std::cout << '.';
 	}
-	if (i == 10)
-		write(1, "|", 1);
+	std::cout << '|';
+	fflush(NULL);
 }
+
+// void print_the_world(const char *str, int len)
+// {
+// 	int	rest;
+// 	int	i = -1;
+// 	int  j = -1;
+
+// 	rest = 10 - len;
+// 	if (rest > 0)
+// 	{
+// 		while(++i < rest)
+// 			write(1, " ", 1);
+// 	}
+// 	else
+// 		i = 0;
+// 	while(i < 10)
+// 	{
+// 		if (i < 9)
+// 		{
+// 			write(1, &str[++j], 1);
+// 			i++;
+// 		}
+// 		if (i == 9)
+// 		{
+// 			if (i < (len - 1))
+// 				write(1, ".", 1);
+// 			else
+// 				write(1, &str[++j], 1);
+// 			i++;
+// 			break ;
+// 		}
+// 	}
+// 	if (i == 10)
+// 		write(1, "|", 1);
+// }
 
 int	PhoneBook::print_specific_contact(PhoneBook ph, int index, int *flag)
 {
@@ -143,14 +160,12 @@ int	PhoneBook::print_specific_contact(PhoneBook ph, int index, int *flag)
 
 void PhoneBook::ft_search(Contact *contacts, int ft_index, int ii, int max)
 {
-	const char	*to_display;	/* convert the string object to char * */
+	std::string to_display;	/* convert the string object to char * */
 	int			ind; 			/* to loop around the menmbers of the struct */
-	// int			j = -1;		/* to loop around the indexes */
 
 	(void)ii;
 	(void)max;
 
-	int i = 0; /* to write 10 characters */
 	ind = -1;
 	while(++ind < 4)
 	{
@@ -162,10 +177,10 @@ void PhoneBook::ft_search(Contact *contacts, int ft_index, int ii, int max)
 			to_display = contacts[ft_index].get_values(1);
 		else if (ind == 3)
 			to_display = contacts[ft_index].get_values(2);
-		i = -1;
-		print_the_world(to_display, strlen(to_display));
+		print_the_world(to_display, strlen(to_display.c_str()));
 	}
 	write(1, "\n", 1);
+	fflush(NULL);
 }
 
 void PhoneBook::ft_add(Contact *contacts, int i, std::string str, int ind)
@@ -182,7 +197,7 @@ void PhoneBook::ft_read(int ind, Contact *contacts,  int ft_index)
 	static int	e;
 
     if (std::cin.eof())
-            exit(0);
+            _exit(0);
 	if (e++ == 0)
 		std::getline(std::cin, line, '\n');
 	if (ind == 0)
