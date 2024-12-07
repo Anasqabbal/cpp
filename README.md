@@ -1,6 +1,8 @@
 # The Goal of Module00
 - ex00 : creat a simple program that takes input as a argument and print it to the user in uppercase format
 
+# what is OOP
+objected oriented programming is approach that makes you view your program as objects instead a series of steps, it views it as a group of objects that have certain properties and can take certain actions
 
 ## New thing based on C
 
@@ -19,7 +21,7 @@ this operator >> to display data to a stream.
 5. for namespace
 
 
-## basic things to know in C
+## basic things to know in C++
 **name space**: Namespaces allows you to group entities like classes objects and functions under a 
 name\
 **classes** is an expanded concept of a data structure, instead of holding only the data, it can hold the both data and functions\
@@ -74,10 +76,21 @@ bouth the cin and cout in c++ is objects which you can use them to get the input
   ```cout << "Hello User" << "\n";```
 
 ## ex01
-
-### important things you should keep them in your mind
+in this section you will creat a program that can accept three command ADD, SEARCH and EXIT. in this program you can save until 8 contacts with the following inforamation.
+firstname, lastname, nickname, phonenumber, and darkest secrets. every time you run ADD, you will add new one until reach the max that is 8, then the old one will be replaced by the new one. don't worry once you quit the program all your data will be losted forever, and you can display this information while you running the SEARCH, this command will print to you all contacts that is saved with its index. then will prompt you to enter an index to see full information for some contact.
 
 #### input buffering
 #### what is buffer
 a buffer contains data that is strored for as short amount of time, typically in teh compuer't memory (RAM) The purpose of a buffer is to hold data right before it is used 
 
+
+### just things I try avoid to lose them
+
+UNFORMATED AND FORMATED IO operations 
+	UNFORMATED I/O operations,
+		unformated input operations, 
+
+	FORMATED I/O operation
+		is read  / write from / to the stream in a specified format to control the appearance
+	and interpretation of data 
+	(char, int, float ...).

@@ -1,5 +1,6 @@
 #include "phonebook.hpp"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 int main()
@@ -22,15 +23,17 @@ int main()
         std::cin >> strl;
         str = strl.c_str();
         if (!str)
-            std::cout.write("7adari oba ba ba ba ba\n", 23);
+            return(std::cout.write("error: fatal\n", 13), 1);
+        if (std::cin.eof())
+            exit(0);
         if (str && !strcmp(str, "ADD"))
         {
-            ph.ft_read(0, ph.get_values(), index);
-            ph.ft_read(1, ph.get_values(), index);
-            ph.ft_read(2, ph.get_values(), index);
-            ph.ft_read(3, ph.get_values(), index);
-            ph.ft_read(4, ph.get_values(), index);
-			ph.set_values(ph.get_values(), index % 8, 0, index);
+            ph.add_to_contact(0, ph.get_values(), index);
+            ph.add_to_contact(1, ph.get_values(), index);
+            ph.add_to_contact(2, ph.get_values(), index);
+            ph.add_to_contact(3, ph.get_values(), index);
+            ph.add_to_contact(4, ph.get_values(), index);
+			ph.set_value_to_index(ph.get_values(), index % 8, index);
 	        if (ph.get_i_value() < 7)
                 ph.set_i_value(index % 8);
             index++;
@@ -54,8 +57,10 @@ int main()
                 if ((!strcmp(res, "")))
                     continue ;
                 isnum = std::all_of(line.begin(), line.end(), ::isdigit);
-				if (isnum &&  ph.print_specific_contact(ph, atoi(res), &flag))
+				if (isnum &&  ph.print_specific_contact(ph, atoi(res)))
 					break ;
+                else
+                    flag = 1;
             }
         }
         else if (str && !strcmp(str, "EXIT"))
