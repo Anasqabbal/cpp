@@ -62,6 +62,7 @@ void PhoneBook::set_i_value(int val)
 
 std::string PhoneBook::get_contact_value(Contact *contacts, int index, int ind)
 {
+<<<<<<< HEAD
 	return ((contacts[index].get_values(ind)));
 }
 
@@ -69,16 +70,70 @@ void print10_right_alighed(std::string str, int len)
 {
 	if (len <= 10)
 		std::cout << std::setw(10) << std::right << str.substr(0, 10);
+=======
+	return (contacts[index].get_values(ind).c_str());
+}
+
+void print_the_world(std::string str, int len)
+{
+	if (len <= 10)
+	{
+		std::cout << std::setw(10) << std::right << str.substr(0.10);
+	}
+>>>>>>> 1f7c0d83ee65aa4612009a78f80bddfe4c19508b
 	else
 	{
 		std::cout << std::setw(9) << std::right << str.substr(0, 9);
 		std::cout << '.';
 	}
+<<<<<<< HEAD
 	std::cout << "|";
 	std::cout << std::flush;
 }
 
 int	PhoneBook::print_specific_contact(PhoneBook ph, int index)
+=======
+	std::cout << '|';
+	fflush(NULL);
+}
+
+// void print_the_world(const char *str, int len)
+// {
+// 	int	rest;
+// 	int	i = -1;
+// 	int  j = -1;
+
+// 	rest = 10 - len;
+// 	if (rest > 0)
+// 	{
+// 		while(++i < rest)
+// 			write(1, " ", 1);
+// 	}
+// 	else
+// 		i = 0;
+// 	while(i < 10)
+// 	{
+// 		if (i < 9)
+// 		{
+// 			write(1, &str[++j], 1);
+// 			i++;
+// 		}
+// 		if (i == 9)
+// 		{
+// 			if (i < (len - 1))
+// 				write(1, ".", 1);
+// 			else
+// 				write(1, &str[++j], 1);
+// 			i++;
+// 			break ;
+// 		}
+// 	}
+// 	if (i == 10)
+// 		write(1, "|", 1);
+// }
+
+int	PhoneBook::print_specific_contact(PhoneBook ph, int index, int *flag)
+>>>>>>> 1f7c0d83ee65aa4612009a78f80bddfe4c19508b
 {
 	std::string str;
 
@@ -111,8 +166,16 @@ int	PhoneBook::print_specific_contact(PhoneBook ph, int index)
 
 void PhoneBook::print_basic_info(Contact *contacts, int ft_index)
 {
+<<<<<<< HEAD
 	std::string to_display;	
 	int			ind;
+=======
+	std::string to_display;	/* convert the string object to char * */
+	int			ind; 			/* to loop around the menmbers of the struct */
+
+	(void)ii;
+	(void)max;
+>>>>>>> 1f7c0d83ee65aa4612009a78f80bddfe4c19508b
 
 	ind = -1;
 	while(++ind < 4)
@@ -125,9 +188,14 @@ void PhoneBook::print_basic_info(Contact *contacts, int ft_index)
 			to_display = contacts[ft_index].get_values(1);
 		else if (ind == 3)
 			to_display = contacts[ft_index].get_values(2);
+<<<<<<< HEAD
 		print10_right_alighed(to_display, strlen(to_display.c_str()));
+=======
+		print_the_world(to_display, strlen(to_display.c_str()));
+>>>>>>> 1f7c0d83ee65aa4612009a78f80bddfe4c19508b
 	}
 	write(1, "\n", 1);
+	fflush(NULL);
 }
 
 void PhoneBook::add_to_contact(int ind, Contact *contacts,  int ft_index)
@@ -139,7 +207,7 @@ void PhoneBook::add_to_contact(int ind, Contact *contacts,  int ft_index)
 	static int	e;
 
     if (std::cin.eof())
-            exit(0);
+            _exit(0);
 	if (e++ == 0)
 		std::getline(std::cin, line, '\n');
 	if (ind == 0)

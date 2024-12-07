@@ -12,7 +12,7 @@ int main()
     PhoneBook  			ph;
     int					index;
     int					flag;
-    bool				isnum;
+    // bool				isnum;
 
     index = 0;
     ph.set_i_value(index - 1);
@@ -51,20 +51,28 @@ int main()
                 std::getline(std::cin, line, '\n');
                 res = line.c_str();
 				if (std::cin.eof())
-            		exit(0);
+            		_exit(0);
                 if (!res)
                     break ;
                 if ((!strcmp(res, "")))
                     continue ;
+<<<<<<< HEAD
                 isnum = std::all_of(line.begin(), line.end(), ::isdigit);
 				if (isnum &&  ph.print_specific_contact(ph, atoi(res)))
 					break ;
                 else
                     flag = 1;
+=======
+                // isnum = std::all_of(line.begin(), line.end(), ::isdigit);
+				// if (isnum &&  ph.print_specific_contact(ph, atoi(res), &flag))
+				// 	break ;
+                 if (ph.print_specific_contact(ph, atoi(res), &flag))
+                    break;
+>>>>>>> 1f7c0d83ee65aa4612009a78f80bddfe4c19508b
             }
         }
         else if (str && !strcmp(str, "EXIT"))
-            exit(0);
+            _exit(0);
     }
     return (0);
 }
